@@ -176,48 +176,9 @@
   left: 32px;
 }
 
-.task-list .ellipse {
-  top: 0;
+.task-list .list {
   position: absolute;
-  width: 31px;
-  height: 31px;
-  left: 0;
-  border-radius: 15.5px;
-  border: 2px solid;
-  border-color: #000000;
-}
-
-.task-list .ellipse-2 {
-  top: 71px;
-  position: absolute;
-  width: 31px;
-  height: 31px;
-  left: 0;
-  border-radius: 15.5px;
-  border: 2px solid;
-  border-color: #000000;
-}
-
-.task-list .ellipse-3 {
-  top: 142px;
-  position: absolute;
-  width: 31px;
-  height: 31px;
-  left: 0;
-  border-radius: 15.5px;
-  border: 2px solid;
-  border-color: #000000;
-}
-
-.task-list .ellipse-4 {
-  top: 213px;
-  position: absolute;
-  width: 31px;
-  height: 31px;
-  left: 0;
-  border-radius: 15.5px;
-  border: 2px solid;
-  border-color: #000000;
+  top: 100px;
 }
 
 .task-list .text-wrapper-2 {
