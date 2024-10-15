@@ -32,31 +32,37 @@ def create_app():
     
 
     @app.route("/add", methods = ["GET"])
-    def add():
+    def renderadd():
         return render_template("add-task.html")
-
-    # @app.route("/add", methods = ["GET", "POST"])
-    # def add():
-    #     if request.method == "POST":
-    #         additionalinfo = request.form.get("user_message")
-    #         quickinfo = request.form.get("task_title")
-    #         duedate = request.form.get("date")
-
-    #     est = pytz.timezone('America/New_York')
-    #     current = datetime.now(est)
-
-    #     new_entry = {
-    #         "completed": False,
-    #         "quickinfo": quickinfo,
-    #         "additionalinfo": additionalinfo,
-    #         "date": current,
-    #         "duedate": duedate
-            
-    #     }
-
-    #     result = collection.insert_one(new_entry)
-    #     return render_template("add-task.html")
     
+    @app.route("/add", methods=["POST"])
+    def submitadd():
+        quickinfo = request.form.get("task_title")
+        additionalinfo = request.form.get("user_message")
+        duedate = request.form.get("date")
+        
+        if not quickinfo or not additionalinfo or not duedate:
+            return render_template("add-task.html", error ="All fields are required!")
+        
+        try:
+            due_date = datetime.strptime(duedate, "Y-%m-%d")
+        except ValueError:
+            return render_template("add-task.html", error="Invalid date format. Use YYYY-MM-DD.")
+
+        est = pytz.timezone('America/New_York')
+        current = datetime.now(est)
+
+        new_entry = {
+            "completed": False,
+            "quickinfo": quickinfo,
+            "additionalinfo": additionalinfo,
+            "date": current,
+            "duedate": duedate
+            
+        }
+
+        result = collection.insert_one(new_entry)
+        return redirect(url_for("home"))
 
     @app.route("/edit")
     def edit():

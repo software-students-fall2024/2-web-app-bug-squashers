@@ -11,7 +11,7 @@
         <div class="div">
             <h1>Add a New Task</h1>
             <!-- the action tag below will send data, need to add URL -->
-            <form action="{{ url_for('add') }}" method="POST">
+            <form action="{{ url_for('submitadd') }}" method="POST">
                 <div id="title">
                     <label for="title">Title:</label><br>
                     <input type="text" id="title" name="task_title" required/>
