@@ -3,6 +3,7 @@ from flask import Flask, render_template, make_response, request, redirect, url_
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime
+import pytz
 
 load_dotenv()
 
@@ -32,6 +33,24 @@ def create_app():
 
     @app.route("/add", methods = ["POST"])
     def add():
+
+        additionalinfo = ''
+        quickinfo = ''
+        duedate = ''
+
+        est = pytz.timezome('America/New_York')
+        current = datetime.now(est)
+
+        new_entry = {
+            "completed": False,
+            "quickinfo": quickinfo,
+            "additionalinfo": additionalinfo,
+            "date": current,
+            "duedate": duedate
+            
+        }
+
+        result = collection.insert_one(new_entry)
         return redirect(url_for("home"))
     
 
