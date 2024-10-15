@@ -51,7 +51,7 @@ def create_app():
         }
 
         result = collection.insert_one(new_entry)
-        return redirect(url_for("home"))
+        return render_template("add-task.html")
     
 
     @app.route("/edit")
