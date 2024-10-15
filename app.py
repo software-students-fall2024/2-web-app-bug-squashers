@@ -1,9 +1,10 @@
 import os
-from flask import Flask, render_template, make_response, request, redirect, url_for
+import pytz
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime
-import pytz
+from bson.objectid import ObjectId
+from flask import Flask, render_template, make_response, request, redirect, url_for
 
 load_dotenv()
 
@@ -37,44 +38,47 @@ def create_app():
     
     @app.route("/add", methods=["POST"])
     def submit_add():
-        quick_info = request.form.get("task_title")
-        additional_info = request.form.get("user_message")
+        name = request.form.get("task_title")
+        desc = request.form.get("user_message")
         due_date = request.form.get("date")
 
-        if not quick_info or not additional_info or not due_date:
+        if not name or not desc or not due_date:
             return render_template("add-task.html", error ="All fields are required!")
-        
         try:
             due_date = datetime.strptime(due_date, "%Y-%m-%d")
         except ValueError:
             return render_template("add-task.html", error="Invalid date format. Use YYYY-MM-DD.")
 
-        est = pytz.timezone('America/New_York')
-        current = datetime.now(est)
-
         new_entry = {
-            "completed": False,
-            "quick_info": quick_info,
-            "additional_info": additional_info,
-            "date": current,
+            "name": name,
+            "description": desc,
             "due_date": due_date
-            
         }
 
-        result = collection.insert_one(new_entry)
+        collection.insert_one(new_entry)
         return redirect(url_for("home"))
 
-    @app.route("/edit")
-    def edit():
+    @app.route("/edit/<id>")
+    def render_edit(id):
+        doc = collection.find_one({"_id": ObjectId(id)})
+        return render_template("edit-task.html", doc=doc)
+
+    @app.route("/edit/<id>", methods=["POST"])
+    def submit_edit(id):
+        vals = {
+            "name": request.form["name"],
+            "description": request.form["desc"],
+            "due_date": request.form["due_date"]
+        }
+        collection.update_one({"_id": ObjectId(id)}, {"$set": vals})
         return redirect(url_for("home"))
 
-
-    @app.route("/search", methods = ["GET"])
+    @app.route("/search")
     def search():
         query = request.args.get("query")
 
         if query:
-            tasks = collection.find({"quickinfo": {"$regex": f".*{query}.*", "$options": "i"}}) 
+            tasks = collection.find({"name": {"$regex": f".*{query}.*", "$options": "i"}}) 
             results = list(tasks)
             return render_template("search-results.html", tasks=results, query=query)
         else:
@@ -90,7 +94,7 @@ def create_app():
 
     # @app.route("/task-list")
     # def load_list():
-    #     return render_template('/task-list.html', task_list=collection)
+    # return render_template('/task-list.html', task_list=collection)
 
     return app
 

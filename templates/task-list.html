@@ -14,10 +14,9 @@
             {% if tasks %}
                 {% for task in tasks %}
                 <p class="task-item">
-                    <strong>Task:</strong> {{ task.quickinfo }} <br>
-                    <strong>Description:</strong> {{ task.additionalinfo }} <br>
-                    <strong>Due Date:</strong> {{ task.duedate or 'No due date' }} <br>
-                    <strong>Completed:</strong> {{ task.completed }} <br>
+                    <strong>Task:</strong> {{ task.name }} <br>
+                    <strong>Description:</strong> {{ task.description }} <br>
+                    <strong>Due Date:</strong> {{ task.due_date or 'No due date' }} <br>
                 </p>
                 {% endfor %}
             {% else %}
