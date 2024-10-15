@@ -4,11 +4,11 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+We want to create a streamlined, multi-purpose task tracking and planner app.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+[See user stories here.](https://github.com/software-students-fall2024/2-web-app-bug-squashers/issues)
 
 ## Steps necessary to run the software
 
@@ -16,4 +16,4 @@ See instructions. Delete this line and place instructions to download, configure
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+[See task board here.](https://github.com/orgs/software-students-fall2024/projects/58)
