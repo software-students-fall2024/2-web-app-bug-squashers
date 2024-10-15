@@ -40,12 +40,12 @@ def create_app():
         quickinfo = request.form.get("task_title")
         additionalinfo = request.form.get("user_message")
         duedate = request.form.get("date")
-        
+
         if not quickinfo or not additionalinfo or not duedate:
             return render_template("add-task.html", error ="All fields are required!")
         
         try:
-            due_date = datetime.strptime(duedate, "Y-%m-%d")
+            due_date = datetime.strptime(duedate, "%Y-%m-%d")
         except ValueError:
             return render_template("add-task.html", error="Invalid date format. Use YYYY-MM-DD.")
 
