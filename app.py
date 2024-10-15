@@ -73,6 +73,9 @@ def create_app():
     def search():
         return redirect(url_for("home"))
 
+    @app.route("/task-list")
+    def load_list():
+        return render_template('/task-list.html', task_list=collection)
 
     return app
 
