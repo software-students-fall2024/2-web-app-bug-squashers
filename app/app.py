@@ -31,27 +31,31 @@ def create_app():
         return render_template("base.html")
     
 
-    @app.route("/add", methods = ["POST"])
+    @app.route("/add", methods = ["GET"])
     def add():
-
-        additionalinfo = ''
-        quickinfo = ''
-        duedate = ''
-
-        est = pytz.timezome('America/New_York')
-        current = datetime.now(est)
-
-        new_entry = {
-            "completed": False,
-            "quickinfo": quickinfo,
-            "additionalinfo": additionalinfo,
-            "date": current,
-            "duedate": duedate
-            
-        }
-
-        result = collection.insert_one(new_entry)
         return render_template("add-task.html")
+
+    # @app.route("/add", methods = ["GET", "POST"])
+    # def add():
+    #     if request.method == "POST":
+    #         additionalinfo = request.form.get("user_message")
+    #         quickinfo = request.form.get("task_title")
+    #         duedate = request.form.get("date")
+
+    #     est = pytz.timezone('America/New_York')
+    #     current = datetime.now(est)
+
+    #     new_entry = {
+    #         "completed": False,
+    #         "quickinfo": quickinfo,
+    #         "additionalinfo": additionalinfo,
+    #         "date": current,
+    #         "duedate": duedate
+            
+    #     }
+
+    #     result = collection.insert_one(new_entry)
+    #     return render_template("add-task.html")
     
 
     @app.route("/edit")

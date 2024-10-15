@@ -9,22 +9,23 @@
 <body>
     <div class="add-task">
         <div class="div">
+            <h1>Add a New Task</h1>
             <!-- the action tag below will send data, need to add URL -->
-            <form action="/add" method="POST">
+            <form action="{{ url_for('add') }}" method="POST">
                 <div id="title">
                     <label for="title">Title:</label><br>
-                    <input type="text" id="title" name="task_title" />
+                    <input type="text" id="title" name="task_title" required/>
                 </div>
 
 
                 <div id="description">
                     <label for="description">Description:</label><br>
-                    <textarea id="msg" name="user_message"></textarea>
+                    <textarea id="msg" name="user_message" required></textarea>
                 </div>
 
                 <div id="date">
                     <label for="date">Due date:</label><br>
-                    <input type="date" id="date" name="date" />
+                    <input type="date" id="date" name="date" required/>
                 </div>
 
                 <div class="button">
