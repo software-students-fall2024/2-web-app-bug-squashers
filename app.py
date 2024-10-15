@@ -9,7 +9,7 @@ load_dotenv()
 
 def create_app():
 
-    app = Flask(__name__, template_folder='../templates')
+    app = Flask(__name__)
 
     MONGO_URI = os.getenv("MONGO_URI")
 
@@ -32,11 +32,11 @@ def create_app():
     
 
     @app.route("/add", methods = ["GET"])
-    def renderadd():
+    def render_add():
         return render_template("add-task.html")
     
     @app.route("/add", methods=["POST"])
-    def submitadd():
+    def submit_add():
         quickinfo = request.form.get("task_title")
         additionalinfo = request.form.get("user_message")
         duedate = request.form.get("date")
