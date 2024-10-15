@@ -9,7 +9,7 @@ load_dotenv()
 
 def create_app():
 
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='../templates')
 
     MONGO_URI = os.getenv("MONGO_URI")
 
@@ -26,9 +26,9 @@ def create_app():
 
     @app.route("/")
     def home():
-        response = make_response("Test", 200)
-        response.mimetype = "text/plain"
-        return response
+        # response = make_response("Test", 200)
+        # response.mimetype = "text/plain"
+        return render_template("base.html")
     
 
     @app.route("/add", methods = ["POST"])
