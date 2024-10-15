@@ -84,7 +84,9 @@ def create_app():
     
     @app.route("/tasklist")
     def tasklist():
-        return render_template("task-list.html")
+        tasks = collection.find()
+        tasklist = list(tasks)
+        return render_template("task-list.html", tasks=tasklist)
 
     # @app.route("/task-list")
     # def load_list():

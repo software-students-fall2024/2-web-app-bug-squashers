@@ -9,13 +9,20 @@
 <body>
     <div class="task-list">
         <div class="div">
-            <div class="list">
-                <ul>
-                    &#123;% for task in task_list %&#125;
-                    <li>&#123;&#123; task &#125;&#125;</li>
-                    &#123;% endfor %&#125;
-                </ul>
-            </div>
+            <h2>Task List</h2>
+
+            {% if tasks %}
+                {% for task in tasks %}
+                <p class="task-item">
+                    <strong>Task:</strong> {{ task.quickinfo }} <br>
+                    <strong>Description:</strong> {{ task.additionalinfo }} <br>
+                    <strong>Due Date:</strong> {{ task.duedate or 'No due date' }} <br>
+                    <strong>Completed:</strong> {{ task.completed }} <br>
+                </p>
+                {% endfor %}
+            {% else %}
+                <p>No tasks found.</p>
+            {% endif %}
             
             <a href="{{ url_for('home') }}">
                 <button type="button">Home</button>
