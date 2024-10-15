@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/style.css" />
+</head>
+
+<body>
+    <div class="search">
+        <div class="div">
+            <div class="text-wrapper-2">Search for a Task</div>
+            <form action="{{ url_for('search') }}" method="GET">
+                <input type="text" id="search-bar" name="query" placeholder="Search tasks..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+
+</html>
