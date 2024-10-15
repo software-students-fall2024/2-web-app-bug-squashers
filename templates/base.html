@@ -10,14 +10,13 @@
     <div class="landing-page">
         <div class="div">
             <div class="text-wrapper">Welcome, User!</div>
-            <a href="task-list.html">
+            <a href="{{ url_for('tasklist') }}">
                 <div class="overlap-group">
-
                     <div class="rectangle"></div>
                     <div class="text-wrapper-2">View Task List</div>
                 </div>
             </a>
-            <a href="task-list.html">
+            <a href="{{ url_for('search') }}">
                 <div class="overlap">
                     <div class="rectangle"></div>
                     <div class="text-wrapper-2">Search for a task</div>

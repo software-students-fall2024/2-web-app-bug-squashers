@@ -71,7 +71,11 @@ def create_app():
 
     @app.route("/search")
     def search():
-        return redirect(url_for("home"))
+        return render_template("search.html")
+    
+    @app.route("/tasklist")
+    def tasklist():
+        return render_template("task-list.html")
 
 
     return app
