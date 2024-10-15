@@ -37,15 +37,15 @@ def create_app():
     
     @app.route("/add", methods=["POST"])
     def submit_add():
-        quickinfo = request.form.get("task_title")
-        additionalinfo = request.form.get("user_message")
-        duedate = request.form.get("date")
+        quick_info = request.form.get("task_title")
+        additional_info = request.form.get("user_message")
+        due_date = request.form.get("date")
 
-        if not quickinfo or not additionalinfo or not duedate:
+        if not quick_info or not additional_info or not due_date:
             return render_template("add-task.html", error ="All fields are required!")
         
         try:
-            due_date = datetime.strptime(duedate, "%Y-%m-%d")
+            due_date = datetime.strptime(due_date, "%Y-%m-%d")
         except ValueError:
             return render_template("add-task.html", error="Invalid date format. Use YYYY-MM-DD.")
 
@@ -54,10 +54,10 @@ def create_app():
 
         new_entry = {
             "completed": False,
-            "quickinfo": quickinfo,
-            "additionalinfo": additionalinfo,
+            "quick_info": quick_info,
+            "additional_info": additional_info,
             "date": current,
-            "duedate": duedate
+            "due_date": due_date
             
         }
 
