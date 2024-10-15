@@ -69,17 +69,26 @@ def create_app():
         return redirect(url_for("home"))
 
 
-    @app.route("/search")
+    @app.route("/search", methods = ["GET"])
     def search():
+        query = request.args.get("query")
+
+        if query:
+            tasks = collection.find({"quickinfo": {"$regex": f".*{query}.*", "$options": "i"}}) 
+            results = list(tasks)
+            return render_template("search-results.html", tasks=results, query=query)
+        else:
+            results = []
+
         return render_template("search.html")
     
     @app.route("/tasklist")
     def tasklist():
         return render_template("task-list.html")
 
-    @app.route("/task-list")
-    def load_list():
-        return render_template('/task-list.html', task_list=collection)
+    # @app.route("/task-list")
+    # def load_list():
+    #     return render_template('/task-list.html', task_list=collection)
 
     return app
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>Search Results</title>
+</head>
+
+<body>
+    <div class="searchresults">
+        <div class = "div">
+            <h2>Search Results for "{{ query }}"</h2>
+
+            {% if tasks %}
+                {% for task in tasks%}
+                <p class="task">
+                    <strong>Task:</strong> {{ task.quickinfo }} <br>
+                    <strong>Description:</strong> {{ task.additionalinfo }} <br>
+                    <strong>Due Date:</strong> {{ task.duedate or 'No due date' }} <br>
+                </p>
+                {% endfor %}
+            {% else %}
+                <p>No tasks found matching your search.</p>
+            {% endif %}
+
+            <a href="{{ url_for('search') }}">Search again</a>
+
+        </div>
+    </div>
+</body>
+</html>
