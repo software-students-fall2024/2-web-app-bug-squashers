@@ -12,8 +12,12 @@ We want to create a streamlined, multi-purpose task tracking and planner app.
 
 ## Steps necessary to run the software
 
-See instructions. Delete this line and place instructions to download, configure, and run the software here.
+1) Create a virtual env and install the requirements in requirements.txt
+2) Create a .env file with the corresponding MONGO_URI found in discord
+3) Run python3 app.py from the home directory and go to [localhost](http://localhost:5000/) in your browser
+
 
 ## Task boards
 
-[See task board here.](https://github.com/orgs/software-students-fall2024/projects/58)
+[Sprint 1](https://github.com/orgs/software-students-fall2024/projects/58)
+[Sprint 2](https://github.com/orgs/software-students-fall2024/projects/86)

@@ -18,7 +18,7 @@
 .edit-task {
   background-color: #ffffff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   font-family: "Inter-Regular", Helvetica;
