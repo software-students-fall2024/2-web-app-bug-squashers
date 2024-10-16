@@ -27,11 +27,8 @@ def create_app():
 
     @app.route("/")
     def home():
-        # response = make_response("Test", 200)
-        # response.mimetype = "text/plain"
         return render_template("base.html")
     
-
     @app.route("/add", methods = ["GET"])
     def render_add():
         return render_template("add-task.html")
@@ -56,7 +53,7 @@ def create_app():
         }
 
         collection.insert_one(new_entry)
-        return redirect(url_for("home"))
+        return redirect(url_for("tasklist"))
 
     @app.route("/edit/<id>")
     def render_edit(id):
@@ -71,7 +68,17 @@ def create_app():
             "due_date": request.form["due_date"]
         }
         collection.update_one({"_id": ObjectId(id)}, {"$set": vals})
-        return redirect(url_for("home"))
+        return redirect(url_for("tasklist"))
+
+    @app.route("/complete/<id>")
+    def render_confirmation(id):
+        doc = collection.find_one({"_id": ObjectId(id)})
+        return render_template("confirm.html", doc=doc)
+    
+    @app.route("/complete/<id>", methods=["POST"])
+    def mark_complete(id):
+        collection.delete_one({"_id": ObjectId(id)})
+        return redirect(url_for("tasklist"))
 
     @app.route("/search")
     def search():
@@ -88,7 +95,7 @@ def create_app():
     
     @app.route("/tasklist")
     def tasklist():
-        tasks = collection.find()
+        tasks = collection.find().sort("due_date", 1)
         tasklist = list(tasks)
         return render_template("task-list.html", tasks=tasklist)
 

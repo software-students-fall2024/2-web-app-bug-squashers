@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
 </head>
 
 <body>
@@ -13,7 +13,7 @@
             <form action="{{ url_for('submit_edit', id=doc._id) }}" method="POST">
                 <div id="name"></div>
                     <label for="name">Name:</label><br>
-                    <input type="text" id="title" name="name" value="{{ doc['name'] }}" required/>
+                    <input type="text" id="title" name="name" value="{{ doc.name }}" required/>
                 </div>
 
                 <div id="description">
@@ -23,15 +23,13 @@
 
                 <div id="date">
                     <label for="date">Due Date:</label><br>
-                    <input type="date" id="date" name="due_date" value="{{ doc['due_date'] }}" required />
+                    <input type="date" id="date" name="due_date" value="{{ doc.due_date }}" required />
                 </div>
 
                 <div class="button">
                     <br><button type="submit">Edit</button>
                 </div>
             </form>
-            <a href="base.html">
-                <img class="home" src="../images/home.png" /></a>
         </div>
     </div>
 </body>

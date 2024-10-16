@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
 </head>
 
 <body>
@@ -11,14 +11,41 @@
         <div class="div">
             <h2>Task List</h2>
 
+            <a href="{{ url_for('render_add') }}">
+                <button type = "button">Add Task</button>
+            </a>
+
             {% if tasks %}
-                {% for task in tasks %}
-                <p class="task-item">
-                    <strong>Task:</strong> {{ task.name }} <br>
-                    <strong>Description:</strong> {{ task.description }} <br>
-                    <strong>Due Date:</strong> {{ task.due_date or 'No due date' }} <br>
-                </p>
-                {% endfor %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Completed</th>
+                            <th>Task Name</th>
+                            <th>Description</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('render_confirmation', id=task._id) }}">
+                                    <button type="button"> Mark Complete </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('render_edit', id=task._id) }}">{{ task.name }}</a>
+                            </td>
+                            <td>
+                                {{ task.description }}
+                            </td>
+                            <td>
+                                {{ task.due_date or 'No due date' }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% else %}
                 <p>No tasks found.</p>
             {% endif %}
@@ -47,7 +74,6 @@
                     <img class="add" src="../images/add.png" />
                 </div>
             </a> -->
-            <a href="base.html"><img class="home" src="../images/home.png" /></a>
             <!-- <img class="edit" src="../images/edit.png" />
             <img class="edit-2" src="../images/edit.png" />
             <img class="edit-3" src="../images/edit.png" />

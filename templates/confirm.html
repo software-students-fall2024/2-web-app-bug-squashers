@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
+    <title>Confirm Task Action</title>
+</head>
+
+<body>
+    <div class="confirm-task">
+        <h1>Confirm Task</h1>
+        
+        <p><strong>Task Name:</strong> {{ doc.name }}</p>
+        <p><strong>Description:</strong> {{ doc.description }}</p>
+        <p><strong>Due Date:</strong> {{ doc.due_date or 'No due date' }}</p>
+        
+        <form action="{{ url_for('render_confirmation', id=doc._id) }}" method="POST">
+            <button type="submit">Confirm</button>
+        </form>
+        
+        <a href="{{ url_for('tasklist') }}">Cancel</a>
+    </div>
+</body>
+
+</html>

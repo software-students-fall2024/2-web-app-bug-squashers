@@ -3,12 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
 </head>
 
 <body>
     <div class="landing-page">
         <div class="div">
+            <a href="base.html"><img class="home" src="{{ url_for('static', filename='images/home.png') }}" /></a>
+            
             <div class="text-wrapper">Welcome, User!</div>
             <a href="{{ url_for('tasklist') }}">
                 <div class="overlap-group">
@@ -22,18 +24,6 @@
                     <div class="text-wrapper-2">Search for a task</div>
                 </div>
             </a>
-            <a href="{{ url_for('render_add') }}">
-                <button type = "button">Add Task</button>
-            </a>
-
-            <!-- <a href="add-task.html">
-                <div class="overlap-group">
-                    <div class="rectangle"></div>
-                    <div class="text-wrapper-2">Add a task</div>
-                </div>
-            </a> -->
-
-            <a href="base.html"><img class="home" src="../images/home.png" /></a>
         </div>
     </div>
 </body>

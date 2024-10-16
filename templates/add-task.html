@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="button">
-                    <br><button type="submit">Add task</button>
+                    <br><button type="submit">Submit</button>
                 </div>
                 <a href="{{ url_for('home') }}">
                     <button type="button">Home</button>
@@ -56,8 +56,6 @@
                 <a href="task-list.html">
                     <img class="close" src="../images/close.png" /></a>
             </div> -->
-            <a href="base.html">
-                <img class="home" src="../images/home.png" /></a>
         </div>
     </div>
 </body>
